@@ -1,0 +1,302 @@
+{
+  "index": 0,
+  "hash": "hQyYZSXPQFNdr/j2xVm/+rJxAr/3iSGh1vEUQRzp2Tc=",
+  "success": true,
+  "block_height": 757,
+  "gas_wanted": 1000000000,
+  "gas_used": 57193635,
+  "memo": "",
+  "response": {
+    "log": "msg:0,success:true,log:,events:[]",
+    "info": "",
+    "error": "",
+    "data": "\n\n",
+    "events": [
+      {
+        "type": "CalculateAmountToMint",
+        "func": "calculateAmountToMint",
+        "pkg_path": "gno.land/r/gnoswap/v1/gns",
+        "attrs": [
+          {
+            "key": "fromHeight",
+            "value": "694"
+          },
+          {
+            "key": "toHeight",
+            "value": "757"
+          },
+          {
+            "key": "year",
+            "value": "1"
+          },
+          {
+            "key": "singleBlockAmount",
+            "value": "14269406"
+          }
+        ]
+      },
+      {
+        "type": "Transfer",
+        "func": "Mint",
+        "pkg_path": "gno.land/r/gnoswap/v1/gns",
+        "attrs": [
+          {
+            "key": "from",
+            "value": ""
+          },
+          {
+            "key": "to",
+            "value": "g10xg6559w9e93zfttlhvdmaaa0er3zewcr7nh20"
+          },
+          {
+            "key": "value",
+            "value": "913241984"
+          }
+        ]
+      },
+      {
+        "type": "MintGNS",
+        "func": "MintGns",
+        "pkg_path": "gno.land/r/gnoswap/v1/gns",
+        "attrs": [
+          {
+            "key": "prevAddr",
+            "value": "g10xg6559w9e93zfttlhvdmaaa0er3zewcr7nh20"
+          },
+          {
+            "key": "prevRealm",
+            "value": "gno.land/r/gnoswap/v1/emission"
+          },
+          {
+            "key": "mintedBlockHeight",
+            "value": "757"
+          },
+          {
+            "key": "mintedGNSAmount",
+            "value": "913241984"
+          },
+          {
+            "key": "accumMintedGNSAmount",
+            "value": "913241984"
+          },
+          {
+            "key": "accumLeftMintGNSAmount",
+            "value": "899999086758016"
+          }
+        ]
+      },
+      {
+        "type": "Transfer",
+        "func": "Transfer",
+        "pkg_path": "gno.land/r/gnoswap/v1/gns",
+        "attrs": [
+          {
+            "key": "from",
+            "value": "g10xg6559w9e93zfttlhvdmaaa0er3zewcr7nh20"
+          },
+          {
+            "key": "to",
+            "value": "g1cceshmzzlmrh7rr3z30j2t5mrvsq9yccysw9nu"
+          },
+          {
+            "key": "value",
+            "value": "684931488"
+          }
+        ]
+      },
+      {
+        "type": "Transfer",
+        "func": "Transfer",
+        "pkg_path": "gno.land/r/gnoswap/v1/gns",
+        "attrs": [
+          {
+            "key": "from",
+            "value": "g10xg6559w9e93zfttlhvdmaaa0er3zewcr7nh20"
+          },
+          {
+            "key": "to",
+            "value": "g1mjvd83nnjee3z2g7683er55me9f09688pd4mj9"
+          },
+          {
+            "key": "value",
+            "value": "182648396"
+          }
+        ]
+      },
+      {
+        "type": "Transfer",
+        "func": "Transfer",
+        "pkg_path": "gno.land/r/gnoswap/v1/gns",
+        "attrs": [
+          {
+            "key": "from",
+            "value": "g10xg6559w9e93zfttlhvdmaaa0er3zewcr7nh20"
+          },
+          {
+            "key": "to",
+            "value": "g100fnnlz5eh87p5hvwt8pf279lxaelm8k8md049"
+          },
+          {
+            "key": "value",
+            "value": "45662099"
+          }
+        ]
+      },
+      {
+        "type": "Transfer",
+        "func": "Transfer",
+        "pkg_path": "gno.land/r/gnoswap/v1/gns",
+        "attrs": [
+          {
+            "key": "from",
+            "value": "g10xg6559w9e93zfttlhvdmaaa0er3zewcr7nh20"
+          },
+          {
+            "key": "to",
+            "value": "g17e3ykyqk9jmqe2y9wxe9zhep3p7cw56davjqwa"
+          },
+          {
+            "key": "value",
+            "value": "0"
+          }
+        ]
+      },
+      {
+        "type": "MintAndDistributeGns",
+        "func": "MintAndDistributeGns",
+        "pkg_path": "gno.land/r/gnoswap/v1/emission",
+        "attrs": [
+          {
+            "key": "prevAddr",
+            "value": "g148tjamj80yyrm309z7rk690an22thd2l3z8ank"
+          },
+          {
+            "key": "prevRealm",
+            "value": "gno.land/r/gnoswap/v1/pool"
+          },
+          {
+            "key": "lastHeight",
+            "value": "0"
+          },
+          {
+            "key": "currentHeight",
+            "value": "757"
+          },
+          {
+            "key": "currentTimestamp",
+            "value": "1745842105"
+          },
+          {
+            "key": "mintedAmount",
+            "value": "913241984"
+          },
+          {
+            "key": "prevLeftAmount",
+            "value": "0"
+          },
+          {
+            "key": "distributedAmount",
+            "value": "913241983"
+          },
+          {
+            "key": "currentLeftAmount",
+            "value": "1"
+          },
+          {
+            "key": "gnsTotalSupply",
+            "value": "100000913241984"
+          }
+        ]
+      },
+      {
+        "type": "Transfer",
+        "func": "Transfer",
+        "pkg_path": "gno.land/r/gnoswap/v1/gns",
+        "attrs": [
+          {
+            "key": "from",
+            "value": "g17290cwvmrapvp869xfnhhawa8sm9edpufzat7d"
+          },
+          {
+            "key": "to",
+            "value": "g1f7wpek7q67tkns27sw495u5yuu3a5wwjxw5l6l"
+          },
+          {
+            "key": "value",
+            "value": "100000000"
+          }
+        ]
+      },
+      {
+        "type": "PoolCreationFee",
+        "func": "CreatePool",
+        "pkg_path": "gno.land/r/gnoswap/v1/pool",
+        "attrs": [
+          {
+            "key": "prevAddr",
+            "value": "g17290cwvmrapvp869xfnhhawa8sm9edpufzat7d"
+          },
+          {
+            "key": "prevRealm",
+            "value": ""
+          },
+          {
+            "key": "poolPath",
+            "value": "gno.land/r/demo/wugnot:gno.land/r/gnoswap/v1/gns:3000"
+          },
+          {
+            "key": "feeTokenPath",
+            "value": "gno.land/r/gnoswap/v1/gns"
+          },
+          {
+            "key": "feeAmount",
+            "value": "100000000"
+          }
+        ]
+      },
+      {
+        "type": "CreatePool",
+        "func": "CreatePool",
+        "pkg_path": "gno.land/r/gnoswap/v1/pool",
+        "attrs": [
+          {
+            "key": "prevAddr",
+            "value": "g17290cwvmrapvp869xfnhhawa8sm9edpufzat7d"
+          },
+          {
+            "key": "prevRealm",
+            "value": ""
+          },
+          {
+            "key": "token0Path",
+            "value": "gno.land/r/demo/wugnot"
+          },
+          {
+            "key": "token1Path",
+            "value": "gno.land/r/gnoswap/v1/gns"
+          },
+          {
+            "key": "fee",
+            "value": "3000"
+          },
+          {
+            "key": "sqrtPriceX96",
+            "value": "79228162514264337593543950337"
+          },
+          {
+            "key": "poolPath",
+            "value": "gno.land/r/demo/wugnot:gno.land/r/gnoswap/v1/gns:3000"
+          },
+          {
+            "key": "tick",
+            "value": "0"
+          },
+          {
+            "key": "tickSpacing",
+            "value": "60"
+          }
+        ]
+      }
+    ]
+  }
+}
