@@ -8,5 +8,6 @@
     "password": "password",
     "dbname": "onbloc",
     "sslMode": "disable"
-  }
+  },
+  "batchSize": 5000
 }

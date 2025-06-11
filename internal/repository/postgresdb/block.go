@@ -9,12 +9,11 @@ import (
 )
 
 type Repository struct {
-	db        *gorm.DB
-	batchSize int
+	db *gorm.DB
 }
 
-func NewRepository(db *gorm.DB, batchSize int) *Repository {
-	return &Repository{db: db, batchSize: batchSize}
+func NewRepository(db *gorm.DB) *Repository {
+	return &Repository{db: db}
 }
 
 func (r Repository) GetLatestHeight(ctx context.Context) (int64, error) {
@@ -88,8 +87,7 @@ func (r Repository) UpsertBalance(ctx context.Context, pkgPath, addr string, amo
 func (r Repository) UpdateTransferBalances(ctx context.Context, event model.TokenEvent) error {
 	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		txRepo := Repository{
-			db:        tx,
-			batchSize: r.batchSize,
+			db: tx,
 		}
 
 		if err := txRepo.UpsertBalance(ctx, event.PkgPath, event.From, -event.Amount); err != nil {

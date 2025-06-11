@@ -15,15 +15,14 @@ import (
 
 func TestEventProcessor_ProcessEvent(t *testing.T) {
 	db, err := gorm.Open(postgres.Open("host=localhost user=postgres password=password dbname=onbloc port=5432 sslmode=disable"), &gorm.Config{})
-	repository := postgresdb.NewRepository(db, 100)
+	repository := postgresdb.NewRepository(db)
 
 	messageQueue, err := messaging.NewSQSClient(context.TODO(), "http://localhost:4566/000000000000/test-queue")
 	assert.Nil(t, err)
 
 	redis := caching.NewRedisClient("localhost:6379", "", 0)
-	err = redis.Set(context.TODO(), "1", 1)
-	assert.Nil(t, err)
-	ep := NewEventProcessor(redis, messageQueue, repository)
+
+	ep := NewEventProcessor(redis, messageQueue, repository, 0)
 
 	te := model.TokenEvent{
 		Type:    block_synchronizer.EventTypeTransfer,

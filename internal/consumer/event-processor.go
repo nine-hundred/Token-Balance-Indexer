@@ -17,13 +17,15 @@ type EventProcessor struct {
 	messageQueue    *messaging.SQSClient
 	repository      *postgresdb.Repository
 	eventStrategies map[string]EventStrategy
+	batchSize       int
 }
 
-func NewEventProcessor(cache caching.Caching, messageQueue *messaging.SQSClient, repository *postgresdb.Repository) *EventProcessor {
+func NewEventProcessor(cache caching.Caching, messageQueue *messaging.SQSClient, repository *postgresdb.Repository, batchSize int) *EventProcessor {
 	p := &EventProcessor{
 		caching:      cache,
 		messageQueue: messageQueue,
 		repository:   repository,
+		batchSize:    batchSize,
 	}
 	p.eventStrategies = map[string]EventStrategy{
 		block_synchronizer.EventFuncTransfer: p.processTransferEvent,

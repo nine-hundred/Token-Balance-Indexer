@@ -17,7 +17,8 @@ func TestService_SyncTransactionRage(t *testing.T) {
 	client := tx_indexer.NewClient("https://dev-indexer.api.gnoswap.io/graphql/query", 30*time.Second)
 	db, err := gorm.Open(postgres.Open("host=localhost user=postgres password=password dbname=onbloc port=5432 sslmode=disable"), &gorm.Config{})
 	assert.Nil(t, err)
-	repository := postgresdb.NewRepository(db, 100)
+
+	repository := postgresdb.NewRepository(db)
 	messageQueue, err := messaging.NewSQSClient(context.TODO(), "http://localhost:4566/000000000000/test-queue")
 	service := NewService(client, repository, messageQueue, 100, 5)
 
@@ -29,7 +30,7 @@ func TestService_publishTransactionEvents(t *testing.T) {
 	client := tx_indexer.NewClient("https://dev-indexer.api.gnoswap.io/graphql/query", 30*time.Second)
 	db, err := gorm.Open(postgres.Open("host=localhost user=postgres password=password dbname=onbloc port=5432 sslmode=disable"), &gorm.Config{})
 	assert.Nil(t, err)
-	repository := postgresdb.NewRepository(db, 100)
+	repository := postgresdb.NewRepository(db)
 	messageQueue, err := messaging.NewSQSClient(context.TODO(), "http://localhost:4566/000000000000/test-queue")
 	assert.Nil(t, err)
 	service := NewService(client, repository, messageQueue, 100, 5)

@@ -34,7 +34,7 @@ func main() {
 		panic(fmt.Sprintf("Failed to connect to database: %s\n", err.Error()))
 	}
 
-	repository := postgresdb.NewRepository(db, conf.BackFillBatchSize)
+	repository := postgresdb.NewRepository(db)
 
 	messageQueue, err := messaging.NewSQSClient(context.TODO(), conf.MessageQueueUrl)
 	if err != nil {

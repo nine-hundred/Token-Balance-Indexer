@@ -35,7 +35,7 @@ func main() {
 		panic(err)
 	}
 
-	repository := postgresdb.NewRepository(db, 0)
+	repository := postgresdb.NewRepository(db)
 
 	service := balance_api_service.NewService(repository)
 	handler := handler2.NewBalanceAPIHandler(service)

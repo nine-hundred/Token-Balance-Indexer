@@ -183,6 +183,14 @@ type GnoEvent struct {
 	Attrs   []Attribute `json:"attrs" graphql:"attrs"`
 }
 
+func (g GnoEvent) GetAttrs() map[string]string {
+	attrMap := map[string]string{}
+	for _, attr := range g.Attrs {
+		attrMap[attr.Key] = attr.Value
+	}
+	return attrMap
+}
+
 func (e *Event) ToModel() *model.TokenEvent {
 	tokenEvent := &model.TokenEvent{
 		Type:    e.Type,

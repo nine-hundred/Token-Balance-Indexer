@@ -170,15 +170,34 @@ const (
 	EventFuncBurn     = "Burn"
 )
 
-var TokenEventTypes = map[string]bool{
-	EventFuncTransfer: true,
-	EventFuncMint:     true,
-	EventFuncBurn:     true,
+type attrRequirement struct {
+	fromEmpty bool
+	toEmpty   bool
+}
+
+var attrRequirements = map[string]attrRequirement{
+	EventFuncMint:     {fromEmpty: true, toEmpty: false},
+	EventFuncBurn:     {fromEmpty: false, toEmpty: true},
+	EventFuncTransfer: {fromEmpty: false, toEmpty: false},
 }
 
 func (s Service) isTransferTokenEvent(event tx_indexer.Event) bool {
 	if event.GnoEvent.Type != EventTypeTransfer {
 		return false
 	}
-	return TokenEventTypes[event.GnoEvent.Func]
+
+	rule, exists := attrRequirements[event.GnoEvent.Func]
+	if !exists {
+		return false
+	}
+	return s.validateEventAttrs(event, rule.fromEmpty, rule.toEmpty)
+}
+
+func (s Service) validateEventAttrs(event tx_indexer.Event, fromEmpty, toEmpty bool) bool {
+	attrs := event.GetAttrs()
+	if len(attrs) != 3 {
+		return false
+	}
+
+	return (attrs["from"] == "") == fromEmpty && (attrs["to"] == "") == toEmpty && attrs["value"] != ""
 }

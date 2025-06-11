@@ -34,9 +34,9 @@ func main() {
 
 	dsn := "host=localhost user=postgres password=password dbname=onbloc port=5432 sslmode=disable"
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	repository := postgresdb.NewRepository(db, 0)
+	repository := postgresdb.NewRepository(db)
 
-	eventProcessor := consumer.NewEventProcessor(redis, messageQueue, repository)
+	eventProcessor := consumer.NewEventProcessor(redis, messageQueue, repository, conf.BatchSize)
 	err = eventProcessor.Start(context.Background())
 	if err != nil {
 
