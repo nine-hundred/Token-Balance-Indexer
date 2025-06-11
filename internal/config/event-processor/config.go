@@ -8,8 +8,9 @@ import (
 )
 
 type EventProcessorConfig struct {
-	MessageQueueUrl string       `json:"messageQueueUrl"`
-	Caching         config.Redis `json:"caching"`
+	MessageQueueUrl string          `json:"messageQueueUrl"`
+	Caching         config.Redis    `json:"caching"`
+	DB              config.Database `json:"db"`
 }
 
 func Load(path string) (config EventProcessorConfig, err error) {

@@ -25,19 +25,17 @@ func main() {
 
 	conf, err := block_synchronizer_config.Load(path)
 	if err != nil {
-		log.Println(err)
 		panic(err)
 	}
 
 	client := tx_indexer.NewClient(conf.TxIndexerEndPoint, time.Second*60)
-	dsn := "host=localhost user=postgres password=password dbname=onbloc port=5432 sslmode=disable"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
-		//Logger: logger.Default.LogMode(logger.Info),
-	})
+	db, err := gorm.Open(postgres.Open(conf.DB.GetDsn()), &gorm.Config{})
 	if err != nil {
 		panic(fmt.Sprintf("Failed to connect to database: %s\n", err.Error()))
 	}
+
 	repository := postgresdb.NewRepository(db, conf.BackFillBatchSize)
+
 	messageQueue, err := messaging.NewSQSClient(context.TODO(), conf.MessageQueueUrl)
 	if err != nil {
 		panic(fmt.Sprintf("Failed to connect to message queue: %s\n", err.Error()))

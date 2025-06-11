@@ -1,6 +1,15 @@
 {
   "txIndexerEndPoint": "https://dev-indexer.api.gnoswap.io/graphql/query",
   "backFillBatchSize": 5000,
-  "messageQueueUrl": "http://localhost:4566/000000000000/test-queue",
-  "syncInterval": 5
+  "messageQueueUrl": "http://localhost:4566/000000000000/event-queue",
+  "syncInterval": 5,
+  "db": {
+    "driver": "postgres",
+    "host": "localhost",
+    "user": "postgres",
+    "port": 5432,
+    "password": "password",
+    "dbname": "onbloc",
+    "sslMode": "disable"
+  }
 }
