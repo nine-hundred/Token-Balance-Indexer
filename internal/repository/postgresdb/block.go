@@ -99,3 +99,41 @@ func (r Repository) UpdateTransferBalances(ctx context.Context, event model.Toke
 		return txRepo.UpsertBalance(ctx, event.PkgPath, event.To, event.Amount)
 	})
 }
+
+func (r Repository) GetBalancesByAddress(ctx context.Context, addr string) (balances []model.Balance, err error) {
+	err = r.db.WithContext(ctx).
+		Where("address = ?", addr).Find(&balances).Error
+	if err != nil {
+		return nil, err
+	}
+	return
+}
+
+func (r Repository) GetAllBalances(ctx context.Context, offset, limit int) (balances []model.Balance, err error) {
+	err = r.db.WithContext(ctx).
+		Offset(offset).Limit(limit).Find(&balances).Error
+	if err != nil {
+		return nil, err
+	}
+	return
+}
+
+func (r Repository) GetTokenPathBalanceByAddress(ctx context.Context, tokenPath, address string) (balances []model.Balance, err error) {
+	err = r.db.WithContext(ctx).
+		Where("token_path = ? and address = ?", tokenPath, address).
+		Find(&balances).Error
+	if err != nil {
+		return nil, err
+	}
+	return
+}
+
+func (r Repository) GetAllTokenPathBalances(ctx context.Context, tokenPath string) (balances []model.Balance, err error) {
+	err = r.db.WithContext(ctx).
+		Where("token_path = ?", tokenPath).
+		Find(&balances).Error
+	if err != nil {
+		return nil, err
+	}
+	return
+}

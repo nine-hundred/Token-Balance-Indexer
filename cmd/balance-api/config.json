@@ -1,0 +1,12 @@
+{
+  "port": 8080,
+  "db": {
+    "driver": "postgres",
+    "host": "localhost",
+    "user": "postgres",
+    "port": 5432,
+    "password": "password",
+    "dbname": "onbloc",
+    "sslMode": "disable"
+  }
+}
