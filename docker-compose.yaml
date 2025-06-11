@@ -36,36 +36,6 @@ services:
       timeout: 3s
       retries: 5
 
-#  block-synchronizer:
-#    build: .
-#    command: ["./block-synchronizer"]
-#    depends_on:
-#      - postgres
-#      - localstack
-#    environment:
-#      - DB_HOST=postgres
-#      - SQS_ENDPOINT=http://localstack:4566
-
-#  event-processor:
-#    build: .
-#    command: ["./event-processor"]
-#    depends_on:
-#      - postgres
-#      - localstack
-#    environment:
-#      - DB_HOST=postgres
-#      - SQS_ENDPOINT=http://localstack:4566
-#
-#  balance-api:
-#    build: .
-#    command: ["./balance-api"]
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - postgres
-#    environment:
-#      - DB_HOST=postgres
-
 volumes:
   postgres_data:
   redis_data:

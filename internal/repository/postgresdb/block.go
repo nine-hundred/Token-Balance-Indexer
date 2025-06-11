@@ -137,3 +137,22 @@ func (r Repository) GetAllTokenPathBalances(ctx context.Context, tokenPath strin
 	}
 	return
 }
+
+func (r Repository) GetTokenTransferHistoryByAddress(ctx context.Context, address string) (tokenEvents []model.TokenEvent, err error) {
+	err = r.db.WithContext(ctx).
+		Where("from_addr = ? or to_addr = ?", address, address).
+		Find(&tokenEvents).Error
+	if err != nil {
+		return nil, err
+	}
+	return
+}
+
+func (r Repository) GetTokenTransferHistories(ctx context.Context) (tokenEvents []model.TokenEvent, err error) {
+	err = r.db.WithContext(ctx).
+		Find(&tokenEvents).Error
+	if err != nil {
+		return nil, err
+	}
+	return
+}

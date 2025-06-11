@@ -23,8 +23,6 @@ func (b *BalanceAPIHandler) GetTokenBalances(c *gin.Context) {
 	wildcard := c.Param("wildcard")
 	wildcard = strings.TrimPrefix(wildcard, "/")
 
-	if !strings.HasSuffix(wi)
-
 	address := c.Query("address")
 	limit, err := strconv.Atoi(c.Query("limit"))
 	if err != nil {
@@ -51,9 +49,8 @@ func (b *BalanceAPIHandler) GetTokenBalances(c *gin.Context) {
 }
 
 func (b BalanceAPIHandler) GetTokenPathBalances(c *gin.Context) {
-	tokenPath := c.Param("tokenPath")
-	tokenPath = strings.ReplaceAll(tokenPath, "%2F", "/")
-
+	wildCard := c.Param("wildcard")
+	tokenPath := strings.TrimSuffix(wildCard, "/balances")[1:]
 	address := c.Query("address")
 
 	var resp response.AccountBalancesResponse
@@ -66,6 +63,25 @@ func (b BalanceAPIHandler) GetTokenPathBalances(c *gin.Context) {
 		c.JSON(http.StatusOK, resp)
 	} else {
 		resp, err = b.service.GetAllTokenPathBalances(c, tokenPath)
+		if err != nil {
+			c.JSON(http.StatusNotFound, err)
+		}
+		c.JSON(http.StatusOK, resp)
+	}
+}
+
+func (b BalanceAPIHandler) GetTokenTransferHistory(c *gin.Context) {
+	address := c.Query("address")
+	var resp response.TransfersResponse
+	var err error
+	if address != "" {
+		resp, err = b.service.GetTokenTransferHistoryByAddress(c, address)
+		if err != nil {
+			c.JSON(http.StatusNotFound, err)
+		}
+		c.JSON(http.StatusOK, resp)
+	} else {
+		resp, err = b.service.GetAllTokenTransferHistory(c)
 		if err != nil {
 			c.JSON(http.StatusNotFound, err)
 		}

@@ -40,9 +40,20 @@ func main() {
 	service := balance_api_service.NewService(repository)
 	handler := handler2.NewBalanceAPIHandler(service)
 	r := gin.Default()
-	r.GET("/tokens/balances", handler.GetTokenBalances)
-	r.GET("/tokens/*tokenPath/balances", handler.GetTokenPathBalances)
-	r.GET("/tokens/token-history")
+	tokenGroup := r.Group("/tokens")
+	tokenGroup.GET("/*wildcard", func(c *gin.Context) {
+		wildcard := c.Param("wildcard")
+		if wildcard == "/balances" {
+			handler.GetTokenBalances(c)
+		} else if wildcard == "/transfer-history" {
+			handler.GetTokenTransferHistory(c)
+		} else {
+			handler.GetTokenPathBalances(c)
+		}
+	})
+	//r.GET("/tokens/balances", handler.GetTokenBalances)
+	//r.GET("/tokens/*tokenPath/balances", handler.GetTokenPathBalances)
+	//r.GET("/tokens/token-history")
 
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", conf.Port),

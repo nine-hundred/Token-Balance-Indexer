@@ -87,3 +87,43 @@ func (s Service) GetAllTokenPathBalances(ctx context.Context, tokenPath string) 
 		AccountBalances: accountBalances,
 	}, nil
 }
+
+func (s Service) GetTokenTransferHistoryByAddress(ctx context.Context, address string) (response.TransfersResponse, error) {
+	histories, err := s.repository.GetTokenTransferHistoryByAddress(ctx, address)
+	if err != nil {
+		return response.TransfersResponse{}, nil
+	}
+
+	transferHistories := make([]response.Transfer, 0, len(histories))
+	for _, history := range histories {
+		transferHistories = append(transferHistories, response.Transfer{
+			FromAddress: history.From,
+			ToAddress:   history.To,
+			TokenPath:   history.PkgPath,
+			Amount:      history.Amount,
+		})
+	}
+	return response.TransfersResponse{
+		Transfers: transferHistories,
+	}, nil
+}
+
+func (s Service) GetAllTokenTransferHistory(ctx context.Context) (response.TransfersResponse, error) {
+	histories, err := s.repository.GetTokenTransferHistories(ctx)
+	if err != nil {
+		return response.TransfersResponse{}, nil
+	}
+
+	transferHistories := make([]response.Transfer, 0, len(histories))
+	for _, history := range histories {
+		transferHistories = append(transferHistories, response.Transfer{
+			FromAddress: history.From,
+			ToAddress:   history.To,
+			TokenPath:   history.PkgPath,
+			Amount:      history.Amount,
+		})
+	}
+	return response.TransfersResponse{
+		Transfers: transferHistories,
+	}, nil
+}
