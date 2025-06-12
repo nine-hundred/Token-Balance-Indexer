@@ -1,5 +1,5 @@
 create-queues:
-	aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name event-queue --no-cli-pager
+	aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name event-queue --attributes VisibilityTimeout=3 --no-cli-pager
 
 docker-up:
 	docker-compose up -d

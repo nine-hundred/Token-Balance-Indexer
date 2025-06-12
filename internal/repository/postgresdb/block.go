@@ -60,11 +60,19 @@ func (r Repository) InsertTransactions(ctx context.Context, transactions []*mode
 	return nil
 }
 
+func (r Repository) WithTransaction(ctx context.Context, fn func(db *gorm.DB) error) error {
+	return r.db.WithContext(ctx).Transaction(fn)
+}
+
+func (r Repository) InsertTokenEventTx(ctx context.Context, tx *gorm.DB, event model.TokenEvent) (err error) {
+	return tx.WithContext(ctx).Create(&event).Error
+}
+
 func (r Repository) InsertTokenEvent(ctx context.Context, event model.TokenEvent) error {
 	return r.db.WithContext(ctx).Create(&event).Error
 }
 
-func (r Repository) UpsertBalance(ctx context.Context, pkgPath, addr string, amount int64) error {
+func (r Repository) UpsertBalance(ctx context.Context, tx *gorm.DB, pkgPath, addr string, amount int64) error {
 	balance := model.Balance{
 		Address:   addr,
 		TokenPath: pkgPath,
@@ -72,7 +80,7 @@ func (r Repository) UpsertBalance(ctx context.Context, pkgPath, addr string, amo
 		UpdatedAt: time.Now(),
 	}
 
-	return r.db.WithContext(ctx).Clauses(clause.OnConflict{
+	return tx.WithContext(ctx).Clauses(clause.OnConflict{
 		Columns: []clause.Column{
 			{Name: "address"},
 			{Name: "token_path"},
@@ -90,11 +98,11 @@ func (r Repository) UpdateTransferBalances(ctx context.Context, event model.Toke
 			db: tx,
 		}
 
-		if err := txRepo.UpsertBalance(ctx, event.PkgPath, event.From, -event.Amount); err != nil {
+		if err := txRepo.UpsertBalance(ctx, nil, event.PkgPath, event.From, -event.Amount); err != nil {
 			return err
 		}
 
-		return txRepo.UpsertBalance(ctx, event.PkgPath, event.To, event.Amount)
+		return txRepo.UpsertBalance(ctx, nil, event.PkgPath, event.To, event.Amount)
 	})
 }
 

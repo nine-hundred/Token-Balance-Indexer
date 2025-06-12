@@ -151,11 +151,11 @@ func (s Service) publishTransactionEvents(ctx context.Context, transactions []tx
 		if len(transaction.Response.Events) == 0 {
 			break
 		}
-		for _, event := range transaction.Response.Events {
+		for i, event := range transaction.Response.Events {
 			if !s.isTransferTokenEvent(event) {
 				continue
 			}
-			err := s.messageQueue.PublishMessage(ctx, event.ToModel())
+			err := s.messageQueue.PublishMessage(ctx, event.ToModel(i))
 			if err != nil {
 				log.Printf("fail to publish event: %v\n", event)
 			}

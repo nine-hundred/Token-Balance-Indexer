@@ -28,13 +28,15 @@ CREATE TABLE IF NOT EXISTS transactions (
 CREATE TABLE token_events (
     id BIGSERIAL PRIMARY KEY,
     transaction_hash VARCHAR(255) NOT NULL,
+    tx_event_index INT NOT NULL,
     pkg_path VARCHAR(255) NOT NULL,
     type VARCHAR(50) NOT NULL,
     func VARCHAR(50) NOT NULL,
     from_addr VARCHAR(50) NOT NULL,
     to_addr VARCHAR(50) NOT NULL,
     amount BIGINT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(transaction_hash, tx_event_index)
 );
 
 CREATE TABLE balances (

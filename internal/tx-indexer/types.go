@@ -191,11 +191,12 @@ func (g GnoEvent) GetAttrs() map[string]string {
 	return attrMap
 }
 
-func (e *Event) ToModel() *model.TokenEvent {
+func (e *Event) ToModel(tei int) *model.TokenEvent {
 	tokenEvent := &model.TokenEvent{
-		Type:    e.Type,
-		PkgPath: e.PkgPath,
-		Func:    e.Func,
+		Type:         e.Type,
+		PkgPath:      e.PkgPath,
+		Func:         e.Func,
+		TxEventIndex: tei,
 	}
 	for _, attr := range e.Attrs {
 		switch attr.Key {

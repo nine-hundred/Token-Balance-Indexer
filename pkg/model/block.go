@@ -39,6 +39,7 @@ func (BlockTransaction) TableName() string {
 
 type TokenEvent struct {
 	TransactionHash string `json:"transactionHash" gorm:"column:transaction_hash;not null"`
+	TxEventIndex    int    `json:"TxEventIndex" gorm:"column:tx_event_index; not null"`
 	Type            string `json:"type" gorm:"column:type;not null"`
 	PkgPath         string `json:"pkg_path" gorm:"column:pkg_path;not null"`
 	Func            string `json:"func" gorm:"column:func;not null"`
