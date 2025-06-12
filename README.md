@@ -29,6 +29,9 @@ make run-processor
 
 # balance-api 실행
 make run-api
+
+# 이 외 사용 가능한 명령어 확인
+make help
 ````
 
 ## 설계 의도

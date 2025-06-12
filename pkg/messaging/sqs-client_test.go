@@ -3,7 +3,6 @@ package messaging
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/stretchr/testify/assert"
 	"onbloc/pkg/model"
 	"testing"
@@ -24,9 +23,8 @@ func TestSQSClient_ReceiveMessage(t *testing.T) {
 	assert.Nil(t, err)
 	msg, err := sqsClient.ReceiveMessage(context.TODO())
 	assert.Nil(t, err)
-	fmt.Println("msg:", msg.JsonData)
+
 	var tokenEvent model.TokenEvent
 	err = json.Unmarshal([]byte(msg.JsonData), &tokenEvent)
 	assert.Nil(t, err)
-	fmt.Println("after", tokenEvent)
 }
