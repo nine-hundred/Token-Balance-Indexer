@@ -97,6 +97,11 @@ func (p SQSClient) GetMessageCount(ctx context.Context) int {
 	return messageCount
 }
 
+func (p SQSClient) CleanQueue(ctx context.Context, url string) error {
+	_, err := p.client.PurgeQueue(ctx, &sqs.PurgeQueueInput{QueueUrl: &url})
+	return err
+}
+
 func (p SQSClient) ReceiveMessage(ctx context.Context) (message MessageObject, err error) {
 	messages, err := p.get(ctx, 1)
 	if err != nil {

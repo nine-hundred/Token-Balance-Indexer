@@ -1,5 +1,6 @@
 create-queues:
 	aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name event-queue --attributes VisibilityTimeout=3 --no-cli-pager
+	aws --endpoint-url=http://localhost:4566 sqs create-queue --queue-name test-queue --attributes VisibilityTimeout=3 --no-cli-pager
 
 docker-up:
 	docker-compose up -d
@@ -17,7 +18,7 @@ env-down:
 	docker-compose down
 
 run-synchronizer:
-	go run cmd/block-synchronizer/main.go -c cmd/block-synchronizer/config.json
+	go run cmd/block-synchronizer/main.go -c cmd/block-synchronizer/config.json > ./synchronizer.log
 
 run-processor:
 	go run cmd/event-processor/main.go -c cmd/event-processor/config.json

@@ -37,8 +37,9 @@ func main() {
 	repository := postgresdb.NewRepository(db)
 
 	eventProcessor := consumer.NewEventProcessor(redis, messageQueue, repository, conf.BatchSize)
+	log.Println("event-processor start!")
 	err = eventProcessor.Start(context.Background())
 	if err != nil {
-
+		log.Fatalf("Event processor failed: %v", err)
 	}
 }

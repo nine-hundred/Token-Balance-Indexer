@@ -51,9 +51,6 @@ func main() {
 			handler.GetTokenPathBalances(c)
 		}
 	})
-	//r.GET("/tokens/balances", handler.GetTokenBalances)
-	//r.GET("/tokens/*tokenPath/balances", handler.GetTokenPathBalances)
-	//r.GET("/tokens/token-history")
 
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%d", conf.Port),

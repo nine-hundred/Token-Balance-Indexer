@@ -33,7 +33,7 @@ func TestEventProcessor_ProcessEvent(t *testing.T) {
 			Type:            block_synchronizer.EventTypeTransfer,
 			TransactionHash: transactionHash,
 			TxEventIndex:    1,
-			PkgPath:         "gno.land/r/gnoswap/v1/test_token/bar",
+			PkgPath:         "gno.land/r/gnoswap/v1/test_token/foo",
 			Func:            block_synchronizer.EventFuncMint,
 			To:              "g17290cwvmrapvp869xfnhhawa8sm9edpufzat7d",
 			From:            "",

@@ -48,6 +48,7 @@ func main() {
 	}
 	log.Println("back-fill done")
 
+	log.Println("synchronizer start!")
 	go service.RunRealtimeSync(context.Background())
 
 	sigChan := make(chan os.Signal, 1)

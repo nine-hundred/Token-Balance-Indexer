@@ -13,6 +13,7 @@ import (
 	"onbloc/pkg/caching"
 	"onbloc/pkg/messaging"
 	"onbloc/pkg/model"
+	"time"
 )
 
 type EventProcessor struct {
@@ -59,6 +60,8 @@ func (p EventProcessor) consume(ctx context.Context) error {
 		return err
 	}
 	if message.IsEmpty() {
+		// todo: event-processor의 운영 환경 확인 후, SQS의 waitTimeout 설정 고려.
+		time.Sleep(time.Second * 3)
 		return nil
 	}
 
@@ -69,9 +72,13 @@ func (p EventProcessor) consume(ctx context.Context) error {
 		return err
 	}
 
+	log.Println(fmt.Sprintf("received token event. hash: %s, idx: %d", tokenEvent.TransactionHash, tokenEvent.TxEventIndex))
 	if err = p.ProcessEvent(ctx, tokenEvent); err != nil {
 		log.Printf("Failed to process event: %v", err)
+		return err
 	}
+
+	log.Println(fmt.Sprintf("processed token event. hash: %s, idx: %d", tokenEvent.TransactionHash, tokenEvent.TxEventIndex))
 	return p.messageQueue.DeleteMessage(ctx, message)
 }
 
